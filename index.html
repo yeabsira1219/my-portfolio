@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yeabsira Tsigedingil — Software Engineering Student</title>
+<title>Yeabsira Tsigedingil, Software Engineering Student</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -30,6 +30,24 @@ body{
 a{ color: inherit; }
 .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 28px; }
 ::selection{ background: var(--olive); color: var(--paper); }
+
+html[data-theme="dark"]{
+  --paper: #1B1D17;
+  --paper-2: #262A21;
+  --ink: #EDE6D6;
+  --ink-soft: #B9C0AC;
+  --olive: #8FA37A;
+  --mustard: #E0A94A;
+  --rule: rgba(237,230,214,0.15);
+}
+body{ transition: background 0.3s ease, color 0.3s ease; }
+#theme-toggle{
+  background: none; border: 1px solid var(--ink); border-radius: 50%;
+  width: 28px; height: 28px; cursor: pointer; font-size: 13px;
+  margin-left: 18px; color: var(--ink);
+  transition: transform 0.3s ease, background 0.2s ease;
+}
+#theme-toggle:hover{ background: var(--paper-2); transform: rotate(20deg); }
 
 #progress-bar{
   position: fixed; top: 0; left: 0; height: 3px;
@@ -123,6 +141,11 @@ h2.section-title{ font-family: 'Fraunces', serif; font-weight: 600; font-size: c
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .skill-pill:hover{ background: var(--olive); color: var(--paper); transform: translateY(-3px); }
+.skill-pill{ cursor: pointer; }
+.skill-pill.active{ background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filter-hint{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); margin-top:10px; }
+.project.hidden{ display: none; }
+#no-projects-msg{ color: var(--ink-soft); font-style: italic; padding: 20px 0; display:none; }
 
 .services-grid{
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
@@ -174,6 +197,24 @@ h2.section-title{ font-family: 'Fraunces', serif; font-weight: 600; font-size: c
   margin-left: 8px; opacity: 0; transition: opacity 0.3s ease;
 }
 #copy-note.show{ opacity: 1; }
+.contact-form{
+  margin-top: 30px; display: flex; flex-direction: column; gap: 14px; max-width: 480px;
+}
+.contact-form input, .contact-form textarea{
+  font-family: 'Public Sans', sans-serif; font-size: 15px;
+  padding: 12px 14px; border: 1px solid var(--ink); border-radius: 8px;
+  background: var(--paper-2); color: var(--ink); resize: vertical;
+}
+.contact-form input:focus, .contact-form textarea:focus{
+  outline: 2px solid var(--olive);
+}
+.contact-form button{
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px; text-transform: uppercase;
+  padding: 12px 20px; border: 1.5px solid var(--ink); border-radius: 8px;
+  background: var(--ink); color: var(--paper); cursor: pointer; width: fit-content;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.contact-form button:hover{ background: var(--olive); }
 
 footer{
   font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft);
@@ -214,6 +255,7 @@ footer{
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
+      <button id="theme-toggle" title="Toggle dark mode">🌙</button>
     </nav>
   </div>
 </header>
@@ -224,11 +266,11 @@ footer{
     <div class="name-row">
       <h1 class="name reveal">Yeabsira<br>Tsigedingil</h1>
       <div class="hero-photo reveal">
-        <img src="photo_2026-07-26_19-48-52.jpg" alt="Yeabsira Tsigedingil">
+        <img src="yeabsira.jpg" alt="Yeabsira Tsigedingil">
       </div>
     </div>
     <div class="role reveal">Second-Year Software Engineering Student</div>
-    <p class="dek reveal">I'm a software engineering student who enjoys building small, real projects to learn how they work, and putting together small tools I'd genuinely want to use.</p>
+    <p class="dek reveal">I'm a software engineering student who learns best by building. I recreate websites I admire to understand how they work, and I put together small tools I'd genuinely want to use.</p>
     <div class="hero-meta reveal">
       <a href="mailto:yeabsirats@icloud.com" id="email-link">yeabsirats@icloud.com</a>
       <a href="https://github.com/yeabsira1219" target="_blank">GitHub</a>
@@ -242,7 +284,7 @@ footer{
     </div>
     <div class="about-grid reveal">
       <div>
-        <p>I'm a second-year software engineering student. I don't have formal work experience yet ,most of what I know comes from building my own projects, following tutorials, and figuring things out by trial and error.</p>
+        <p>I'm a second-year software engineering student. I don't have formal work experience yet. Most of what I know comes from building my own projects, following tutorials, and figuring things out by trial and error.</p>
         <p>I'm especially interested in front-end development, and I like recreating real websites to understand how they're built under the hood.</p>
       </div>
       <p class="pull">"Every project I build teaches me something the last one didn't."</p>
@@ -269,12 +311,13 @@ footer{
       <h2 class="section-title">Skills</h2>
     </div>
     <div class="skills-list reveal">
-      <span class="skill-pill">Python</span>
-      <span class="skill-pill">Node.js</span>
-      <span class="skill-pill">C++</span>
-      <span class="skill-pill">HTML5</span>
-      <span class="skill-pill">CSS3</span>
+      <span class="skill-pill" data-skill="Python">Python</span>
+      <span class="skill-pill" data-skill="Node.js">Node.js</span>
+      <span class="skill-pill" data-skill="C++">C++</span>
+      <span class="skill-pill" data-skill="HTML5">HTML5</span>
+      <span class="skill-pill" data-skill="CSS3">CSS3</span>
     </div>
+    <p class="filter-hint reveal">Click a skill to see which projects use it.</p>
   </section>
 
   <section id="services">
@@ -307,25 +350,25 @@ footer{
       <h2 class="section-title">Selected Projects</h2>
     </div>
 
-    <div class="project reveal">
+    <div class="project reveal" data-tags="HTML5,CSS3,JavaScript">
       <div class="project-num">01</div>
       <div>
         <div class="project-title"><a href="https://github.com/yeabsira1219/first-project/blob/main/assignment-2.html" target="_blank">Puppy Lover</a></div>
-        <p class="project-desc">A site for dog lovers to browse and enjoy puppy content, built to practice layout and styling.</p>
-        <div class="project-tags"><span>HTML5</span><span>CSS3</span></div>
+        <p class="project-desc">A site for dog lovers to browse and enjoy puppy content, built to practice layout, styling, and basic interactivity.</p>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
       </div>
     </div>
 
-    <div class="project reveal">
+    <div class="project reveal" data-tags="HTML5,CSS3,JavaScript">
       <div class="project-num">02</div>
       <div>
         <div class="project-title"><a href="https://github.com/yeabsira1219/third-assignment/blob/main/apple%20web%20(2).zip" target="_blank">Apple Website Clone</a></div>
         <p class="project-desc">A front-end recreation of Apple's website, focused on matching clean typography, spacing, and layout detail.</p>
-        <div class="project-tags"><span>HTML5</span><span>CSS3</span></div>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
       </div>
     </div>
 
-    <div class="project reveal">
+    <div class="project reveal" data-tags="HTML5,CSS3,JavaScript">
       <div class="project-num">03</div>
       <div>
         <div class="project-title"><a href="https://github.com/yeabsira1219/third-assignment/blob/main/real%20estate%20website.zip" target="_blank">Real Estate Website</a></div>
@@ -333,6 +376,7 @@ footer{
         <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
       </div>
     </div>
+    <p id="no-projects-msg">No projects using this skill yet. Check back as I build more.</p>
   </section>
 
   <section id="contact" class="contact">
@@ -340,17 +384,24 @@ footer{
       <span class="section-num">06</span>
       <h2 class="section-title">Get in Touch</h2>
     </div>
-    <p class="reveal" style="max-width:50ch; color:var(--ink-soft);">Open to internships, collaborations, and interesting problems. The fastest way to reach me is email . I read everything, even if I'm slow to reply.</p>
+    <p class="reveal" style="max-width:50ch; color:var(--ink-soft);">Open to internships, collaborations, and interesting problems. The fastest way to reach me is email. I read everything, even if I'm slow to reply.</p>
     <div class="contact-links reveal">
-      <a href="mailto:yeabsira@example.com" id="email-link-2">Email</a><span id="copy-note">copied!</span>
+      <a href="mailto:yeabsirats@icloud.com" id="email-link-2">Email</a><span id="copy-note">copied!</span>
       <a href="https://github.com/yeabsira1219" target="_blank">GitHub</a>
     </div>
+    <form class="contact-form reveal" id="contact-form">
+      <input type="text" id="cf-name" placeholder="Your name" required>
+      <input type="email" id="cf-email" placeholder="Your email" required>
+      <textarea id="cf-message" rows="4" placeholder="Your message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 
 </main>
 
 <footer class="wrap">
   <span>© 2026 Yeabsira Tsigedingil</span>
+  <span>Built with care, edited by hand</span>
 </footer>
 
 <button id="top-btn" title="Back to top">↑</button>
@@ -398,7 +449,7 @@ footer{
 
   function copyEmail(e) {
     e.preventDefault();
-    const email = 'yeabsira@example.com';
+    const email = 'yeabsirats@icloud.com';
     navigator.clipboard.writeText(email).then(() => {
       const note = document.getElementById('copy-note');
       note.classList.add('show');
@@ -406,6 +457,56 @@ footer{
     });
   }
   document.getElementById('email-link-2').addEventListener('click', copyEmail);
+
+  const themeToggle = document.getElementById('theme-toggle');
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+  setTheme(localStorage.getItem('theme') || 'light');
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  const skillPills = document.querySelectorAll('.skill-pill');
+  const projectCards = document.querySelectorAll('.project');
+  const noProjectsMsg = document.getElementById('no-projects-msg');
+  skillPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const alreadyActive = pill.classList.contains('active');
+      skillPills.forEach(p => p.classList.remove('active'));
+
+      if (alreadyActive) {
+        projectCards.forEach(card => card.classList.remove('hidden'));
+        noProjectsMsg.style.display = 'none';
+        return;
+      }
+
+      pill.classList.add('active');
+      const skill = pill.dataset.skill;
+      let anyVisible = false;
+      projectCards.forEach(card => {
+        const tags = card.dataset.tags.split(',');
+        const matches = tags.includes(skill);
+        card.classList.toggle('hidden', !matches);
+        if (matches) anyVisible = true;
+      });
+      noProjectsMsg.style.display = anyVisible ? 'none' : 'block';
+    });
+  });
+
+  const contactForm = document.getElementById('contact-form');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value;
+    const email = document.getElementById('cf-email').value;
+    const message = document.getElementById('cf-message').value;
+    const subject = encodeURIComponent('Portfolio contact from ' + name);
+    const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
+    window.location.href = `mailto:yeabsirats@icloud.com?subject=${subject}&body=${body}`;
+  });
 </script>
 
 </body>
