@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yeabsira Tsigedingil — Software Engineering Student</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ COLORS ============ */
+:root{
+  --paper: #EDE6D6;
+  --paper-2: #E4DBC6;
+  --ink: #22261F;
+  --ink-soft: #4A4F41;
+  --olive: #5B6B4E;
+  --mustard: #C08A2C;
+  --rule: rgba(34,38,31,0.18);
+  --max: 920px;
+}
+
+/* ============ BASICS ============ */
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html{ scroll-behavior: smooth; }
+body{
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Public Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+a{ color: inherit; }
+.wrap{ max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+::selection{ background: var(--olive); color: var(--paper); }
+
+/* progress bar that fills as you scroll down the page */
+#progress-bar{
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--mustard); width: 0%; z-index: 100;
+  transition: width 0.1s ease-out;
+}
+
+/* ============ HEADER / MASTHEAD ============ */
+header.masthead{
+  padding: 22px 0 14px;
+  border-bottom: 1.5px solid var(--ink);
+  position: sticky; top: 0; background: var(--paper); z-index: 10;
+}
+.masthead-row{
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px; text-transform: uppercase;
+}
+.masthead-nav a{
+  margin-left: 18px; text-decoration: none; color: var(--ink-soft);
+  padding-bottom: 3px; border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.masthead-nav a:hover{ color: var(--ink); }
+.masthead-nav a.active{ color: var(--ink); border-color: var(--mustard); }
+
+/* ============ HERO SECTION ============ */
+.hero{ padding: 64px 0 56px; }
+.name-row{
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 28px; flex-wrap: wrap;
+}
+h1.name{
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(48px, 9vw, 92px);
+  line-height: 1;
+}
+.hero-photo{
+  width: 132px; height: 132px; border-radius: 50%;
+  border: 1.5px solid var(--ink); padding: 5px; background: var(--paper-2);
+  transition: transform 0.3s ease;
+}
+.hero-photo:hover{ transform: rotate(-4deg) scale(1.03); }
+.hero-photo img{
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
+}
+.hero .role{
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: clamp(20px, 2.6vw, 28px); color: var(--ink-soft); margin-top: 14px;
+}
+.hero .dek{ max-width: 52ch; margin-top: 22px; font-size: 17px; color: var(--ink-soft); }
+.hero-meta{
+  display: flex; gap: 28px; margin-top: 34px; flex-wrap: wrap;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+}
+.hero-meta a{ text-decoration: underline; position: relative; }
+
+/* ============ SCROLL REVEAL ============ */
+.reveal{ opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in{ opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1; transform: none; transition: none; }
+  html{ scroll-behavior: auto; }
+}
+
+/* ============ SHARED SECTION STYLES ============ */
+section{ padding: 52px 0; border-bottom: 1px solid var(--rule); }
+.section-head{ display: flex; align-items: baseline; gap: 14px; margin-bottom: 32px; }
+.section-num{ font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--mustard); }
+h2.section-title{ font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 4vw, 36px); }
+
+/* ============ ABOUT ============ */
+.about-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.about-grid p{ margin-bottom: 14px; color: var(--ink-soft); }
+.pull{
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 20px;
+  border-left: 2px solid var(--mustard); padding-left: 18px;
+}
+
+/* ============ SKILLS ============ */
+.skills-list{ display: flex; flex-wrap: wrap; gap: 12px 10px; }
+.skill-pill{
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+  padding: 7px 14px; border: 1px solid var(--ink); border-radius: 100px;
+  background: var(--paper-2); cursor: default;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.skill-pill:hover{ background: var(--olive); color: var(--paper); transform: translateY(-3px); }
+
+/* ============ PROJECTS ============ */
+.project{
+  display: grid; grid-template-columns: 90px 1fr; gap: 20px;
+  padding: 28px 16px; border-top: 1px solid var(--rule); border-radius: 8px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.project:first-of-type{ border-top: none; }
+.project:hover{ background: var(--paper-2); transform: translateX(6px); }
+.project-num{
+  font-family: 'Fraunces', serif; font-size: 34px;
+  color: var(--paper-2); -webkit-text-stroke: 1px var(--ink);
+}
+.project-title{ font-family: 'Fraunces', serif; font-weight: 600; font-size: 24px; }
+.project-title a{ text-decoration: none; }
+.project-title a:hover{ color: var(--olive); }
+.project-desc{ color: var(--ink-soft); margin-top: 8px; max-width: 60ch; }
+.project-tags{ margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+.project-tags span{
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft);
+  padding: 3px 9px; border: 1px solid var(--rule); border-radius: 100px;
+}
+
+/* ============ CONTACT ============ */
+.contact{ border-bottom: none; }
+.contact-links{ margin-top: 26px; display: flex; gap: 26px; flex-wrap: wrap; }
+.contact-links a{
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; text-decoration: underline;
+}
+.contact-links a:hover{ color: var(--olive); }
+#copy-note{
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--olive);
+  margin-left: 8px; opacity: 0; transition: opacity 0.3s ease;
+}
+#copy-note.show{ opacity: 1; }
+
+/* ============ FOOTER ============ */
+footer{
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft);
+  padding: 22px 0 40px; text-transform: uppercase; display: flex; justify-content: space-between;
+}
+
+/* ============ BACK TO TOP ============ */
+#top-btn{
+  position: fixed; bottom: 26px; right: 26px;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1.5px solid var(--ink); background: var(--paper);
+  font-family: 'IBM Plex Mono', monospace; font-size: 16px; cursor: pointer;
+  opacity: 0; pointer-events: none; transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+}
+#top-btn.show{ opacity: 1; pointer-events: auto; transform: none; }
+#top-btn:hover{ background: var(--olive); color: var(--paper); }
+
+/* ============ MOBILE ============ */
+@media (max-width: 640px){
+  .masthead-row{ flex-direction: column; align-items: flex-start; gap: 6px; }
+  .project{ grid-template-columns: 1fr; }
+}
+@media (max-width: 720px){
+  .about-grid{ grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<header class="masthead">
+  <div class="wrap masthead-row">
+    <span></span>
+    <nav class="masthead-nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border-bottom:none; padding-bottom:0;">
+    <div class="name-row">
+      <h1 class="name reveal">Yeabsira<br>Tsigedingil</h1>
+      <div class="hero-photo reveal">
+        <img src="https://placehold.co/200x200/EDE6D6/22261F?text=YT" alt="Yeabsira Tsigedingil">
+      </div>
+    </div>
+    <div class="role reveal">Second-Year Software Engineering Student</div>
+    <p class="dek reveal">I'm a software engineering student who enjoys building small, real projects to learn by doing — from clones of sites I like to apps I'd actually use myself.</p>
+    <div class="hero-meta reveal">
+      <a href="mailto:yeabsirats@icloud.com" id="email-link">yeabsirats@icloud.com</a>
+      <a href="https://github.com/yeabsira1219" target="_blank">GitHub</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>I'm a second-year software engineering student. I don't have formal work experience yet — most of what I know comes from building my own projects, following tutorials, and figuring things out by trial and error.</p>
+        <p>I'm especially interested in front-end development, and I like recreating real websites to understand how they're built under the hood.</p>
+      </div>
+      <p class="pull">"Every project I build teaches me something the last one didn't."</p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-head reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-list reveal">
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">Node.js</span>
+      <span class="skill-pill">C++</span>
+      <span class="skill-pill">HTML5</span>
+      <span class="skill-pill">CSS3</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-head reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Selected Projects</h2>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-num">01</div>
+      <div>
+        <div class="project-title"><a href="https://github.com/yeabsira1219/first-project/blob/main/assignment-2.html" target="_blank">Puppy Lover</a></div>
+        <p class="project-desc">A site for dog lovers to browse and enjoy puppy content, built to practice layout, styling, and basic interactivity.</p>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-num">02</div>
+      <div>
+        <div class="project-title"><a href="https://github.com/yeabsira1219/third-assignment/blob/main/apple%20web%20(2).zip" target="_blank">Apple Website Clone</a></div>
+        <p class="project-desc">A front-end recreation of Apple's website, focused on matching clean typography, spacing, and layout detail.</p>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-num">03</div>
+      <div>
+        <div class="project-title"><a href="https://github.com/yeabsira1219/third-assignment/blob/main/real%20estate%20website.zip" target="_blank">Real Estate Website</a></div>
+        <p class="project-desc">A property listings site for browsing homes for sale or rent, with a focus on clear, organized listing layouts.</p>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="section-head reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Get in Touch</h2>
+    </div>
+    <p class="reveal" style="max-width:50ch; color:var(--ink-soft);">Open to internships, collaborations, and interesting problems. The fastest way to reach me is email — I read everything, even if I'm slow to reply.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:yeabsirats@icloud.com" id="email-link-2">Email</a><span id="copy-note">copied!</span>
+      <a href="https://github.com/yeabsira1219" target="_blank">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Yeabsira Tsigedingil</span>
+  <span>Built with care, edited by hand</span>
+</footer>
+
+<button id="top-btn" title="Back to top">↑</button>
+
+<script>
+  /* ---- 1. Scroll-reveal: fade/slide sections in as they enter view ---- */
+  const revealItems = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealItems.forEach(el => revealObserver.observe(el));
+
+  /* ---- 2. Top scroll-progress bar ---- */
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = percent + '%';
+  });
+
+  /* ---- 3. Highlight the current section in the nav while scrolling ---- */
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.masthead-nav a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(sec => navObserver.observe(sec));
+
+  /* ---- 4. Back-to-top button: show after scrolling down, click to scroll up ---- */
+  const topBtn = document.getElementById('top-btn');
+  window.addEventListener('scroll', () => {
+    topBtn.classList.toggle('show', window.scrollY > 400);
+  });
+  topBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---- 5. Click email address to copy it to clipboard ---- */
+  function copyEmail(e) {
+    e.preventDefault();
+    const email = 'yeabsira@example.com';
+    navigator.clipboard.writeText(email).then(() => {
+      const note = document.getElementById('copy-note');
+      note.classList.add('show');
+      setTimeout(() => note.classList.remove('show'), 1500);
+    });
+  }
+  document.getElementById('email-link-2').addEventListener('click', copyEmail);
+</script>
+
+</body>
+</html>
