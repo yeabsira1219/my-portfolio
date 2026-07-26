@@ -213,7 +213,7 @@ footer{
       </div>
     </div>
     <div class="role reveal">Second-Year Software Engineering Student</div>
-    <p class="dek reveal">I'm a software engineering student who enjoys building small, real projects to learn by doing — from clones of sites I like to apps I'd actually use myself.</p>
+    <p class="dek reveal">I'm a software engineering student who enjoys building small, real projects to learn by doing  from clones of sites I like to apps I'd actually use myself.</p>
     <div class="hero-meta reveal">
       <a href="mailto:yeabsirats@icloud.com" id="email-link">yeabsirats@icloud.com</a>
       <a href="https://github.com/yeabsira1219" target="_blank">GitHub</a>
@@ -228,7 +228,7 @@ footer{
     </div>
     <div class="about-grid reveal">
       <div>
-        <p>I'm a second-year software engineering student. I don't have formal work experience yet — most of what I know comes from building my own projects, following tutorials, and figuring things out by trial and error.</p>
+        <p>I'm a second-year software engineering student. I don't have formal work experience yet , most of what I know comes from building my own projects, following tutorials, and figuring things out by trial and error.</p>
         <p>I'm especially interested in front-end development, and I like recreating real websites to understand how they're built under the hood.</p>
       </div>
       <p class="pull">"Every project I build teaches me something the last one didn't."</p>
@@ -261,8 +261,8 @@ footer{
       <div class="project-num">01</div>
       <div>
         <div class="project-title"><a href="https://github.com/yeabsira1219/first-project/blob/main/assignment-2.html" target="_blank">Puppy Lover</a></div>
-        <p class="project-desc">A site for dog lovers to browse and enjoy puppy content, built to practice layout, styling, and basic interactivity.</p>
-        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+        <p class="project-desc">A site for dog lovers to browse and enjoy puppy content, built to practice layout and styling.</p>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span></div>
       </div>
     </div>
 
@@ -271,7 +271,7 @@ footer{
       <div>
         <div class="project-title"><a href="https://github.com/yeabsira1219/third-assignment/blob/main/apple%20web%20(2).zip" target="_blank">Apple Website Clone</a></div>
         <p class="project-desc">A front-end recreation of Apple's website, focused on matching clean typography, spacing, and layout detail.</p>
-        <div class="project-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+        <div class="project-tags"><span>HTML5</span><span>CSS3</span></div>
       </div>
     </div>
 
@@ -291,7 +291,7 @@ footer{
       <span class="section-num">04</span>
       <h2 class="section-title">Get in Touch</h2>
     </div>
-    <p class="reveal" style="max-width:50ch; color:var(--ink-soft);">Open to internships, collaborations, and interesting problems. The fastest way to reach me is email — I read everything, even if I'm slow to reply.</p>
+    <p class="reveal" style="max-width:50ch; color:var(--ink-soft);">Open to internships, collaborations, and interesting problems. The fastest way to reach me is email . I read everything, even if I'm slow to reply.</p>
     <div class="contact-links reveal">
       <a href="mailto:yeabsirats@icloud.com" id="email-link-2">Email</a><span id="copy-note">copied!</span>
       <a href="https://github.com/yeabsira1219" target="_blank">GitHub</a>
@@ -302,13 +302,11 @@ footer{
 
 <footer class="wrap">
   <span>© 2026 Yeabsira Tsigedingil</span>
-  <span>Built with care, edited by hand</span>
 </footer>
 
 <button id="top-btn" title="Back to top">↑</button>
 
 <script>
-  /* ---- 1. Scroll-reveal: fade/slide sections in as they enter view ---- */
   const revealItems = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -320,7 +318,6 @@ footer{
   }, { threshold: 0.15 });
   revealItems.forEach(el => revealObserver.observe(el));
 
-  /* ---- 2. Top scroll-progress bar ---- */
   const progressBar = document.getElementById('progress-bar');
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
@@ -329,7 +326,6 @@ footer{
     progressBar.style.width = percent + '%';
   });
 
-  /* ---- 3. Highlight the current section in the nav while scrolling ---- */
   const sections = document.querySelectorAll('main section[id]');
   const navLinks = document.querySelectorAll('.masthead-nav a');
   const navObserver = new IntersectionObserver((entries) => {
@@ -343,7 +339,6 @@ footer{
   }, { rootMargin: '-40% 0px -50% 0px' });
   sections.forEach(sec => navObserver.observe(sec));
 
-  /* ---- 4. Back-to-top button: show after scrolling down, click to scroll up ---- */
   const topBtn = document.getElementById('top-btn');
   window.addEventListener('scroll', () => {
     topBtn.classList.toggle('show', window.scrollY > 400);
@@ -352,7 +347,6 @@ footer{
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ---- 5. Click email address to copy it to clipboard ---- */
   function copyEmail(e) {
     e.preventDefault();
     const email = 'yeabsira@example.com';
